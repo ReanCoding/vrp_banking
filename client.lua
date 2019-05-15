@@ -148,7 +148,7 @@ if enableBankingGui then
       Citizen.Wait(0)
       if(IsNearBank() or IsNearATM()) then
         if (atBank == false) then
-          TriggerEvent('chatMessage', "", {255, 255, 255}, "Tryk ^5E^0 for at bruge banken");
+	  drawTxt('Tryk [~g~E~s~] for at bruge banken', 0, 1, 0.5, 0.8, 0.6, 255, 255, 255, 255)
         end
         atBank = true
         if IsControlJustPressed(1, 51)  then -- IF INPUT_PICKUP Is pressed
@@ -295,7 +295,7 @@ AddEventHandler('bank:deposit', function(amount)
       TriggerEvent('chatMessage', "", {0, 255, 0}, "^1Du kan ikke bruge ATM'en i et køretøj!");
     else
       TriggerServerEvent("bank:deposit", tonumber(amount))
-      TriggerEvent('chatMessage', "BANK", {0, 200, 0}, "^0Du har indsat ^5$"..amount);
+      TriggerEvent('chatMessage', "BANK", {0, 200, 0}, "^0Du har indsat ^5$DKK"..amount);
     end
   else
     TriggerEvent('chatMessage', "", {0, 255, 0}, "^1Du kan kun indsætte penge i banken!");
@@ -310,7 +310,7 @@ AddEventHandler('bank:withdraw', function(amount)
       TriggerEvent('chatMessage', "", {0, 255, 0}, "^1Du kan ikke bruge banken i et køretøj!");
     else
       TriggerServerEvent("bank:withdraw", tonumber(amount))
-      TriggerEvent('chatMessage', "BANK", {0, 200, 0}, "^0Du har hævet: ^5$"..amount);
+      TriggerEvent('chatMessage', "BANK", {0, 200, 0}, "^0Du har hævet: ^5DKK"..amount);
     end
   else
     TriggerEvent('chatMessage', "", {0, 255, 0}, "^1Dette er ikke en bank eller en ATM!");
@@ -375,3 +375,19 @@ AddEventHandler("banking:removeBalance", function(amount)
 		amount = amount
 	})
 end)
+
+
+function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
+	SetTextFont(font)
+	SetTextProportional(0)
+	SetTextScale(scale, scale)
+	SetTextColour(r, g, b, a)
+	SetTextDropShadow(0, 0, 0, 0, 255)
+	SetTextEdge(1, 0, 0, 0, 255)
+	SetTextDropShadow()
+	SetTextOutline()
+	SetTextCentre(centre)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(x, y)
+end
