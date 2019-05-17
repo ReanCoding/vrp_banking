@@ -59,7 +59,7 @@ $(document).ready(function(){
     var item = event.data;
     // Update HUD Balance
     if(item.updateBalance == true) {
-      $('.currentBalance').html('$'+addCommas(event.data.balance));
+      $('.currentBalance').html('DKK '+addCommas(event.data.balance));
       $('.username').html(event.data.player);
     }
     // Trigger Add Balance Popup
